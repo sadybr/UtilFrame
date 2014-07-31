@@ -1,0 +1,6 @@
+ora_databaseType=oracle
+ora_database=instanceName
+ora_host=192.168.0.2
+ora_port=1521
+ora_login=login
+ora_password=password
