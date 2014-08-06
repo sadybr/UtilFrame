@@ -9,6 +9,6 @@ Its realy easy to access your database, it has a simple way to create queries an
 
 To use you will need add UtilFrame.jar to your project and respective database connection drive.
 
-Anny comments are wellcome.
+Any comments are wellcome.
 
 Enjoy my work.
