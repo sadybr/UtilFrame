@@ -1,9 +1,9 @@
 package sady.utilframe.examples;
-import util.bdControl.DBControl;
-import util.bdControl.DBControl.DebugType;
-import util.bdControl.GenericObject;
-import util.bdControl.ObjectOperation;
-import util.bdControl.QueryFinder;
+import sady.utilframe.bdControl.DBControl;
+import sady.utilframe.bdControl.DBControl.DebugType;
+import sady.utilframe.bdControl.GenericObject;
+import sady.utilframe.bdControl.ObjectOperation;
+import sady.utilframe.bdControl.QueryFinder;
 
 
 public class Teste1 {

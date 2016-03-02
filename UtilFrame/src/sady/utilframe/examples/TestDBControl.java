@@ -1,6 +1,6 @@
 package sady.utilframe.examples;
-import util.bdControl.GenericObject;
-import util.bdControl.QueryFinder;
+import sady.utilframe.bdControl.GenericObject;
+import sady.utilframe.bdControl.QueryFinder;
 
 
 public class TestDBControl {

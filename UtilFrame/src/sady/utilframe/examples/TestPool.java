@@ -2,8 +2,8 @@ package sady.utilframe.examples;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import util.bdControl.DBControl;
-import util.bdControl.GenericObject;
+import sady.utilframe.bdControl.DBControl;
+import sady.utilframe.bdControl.GenericObject;
 
 
 public class TestPool {

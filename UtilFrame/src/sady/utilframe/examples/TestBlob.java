@@ -4,9 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import util.bdControl.DBControl;
-import util.bdControl.GenericObject;
-import util.bdControl.QueryFinder;
+import sady.utilframe.bdControl.DBControl;
+import sady.utilframe.bdControl.GenericObject;
+import sady.utilframe.bdControl.QueryFinder;
 
 
 public class TestBlob {

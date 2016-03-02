@@ -1,11 +1,12 @@
 package sady.utilframe.examples;
+
 import java.sql.SQLException;
 
-import util.bdControl.DBControl;
-import util.bdControl.DBControl.DebugType;
-import util.bdControl.GenericObject;
-import util.bdControl.QueryFinder;
-import util.bdControl.connection.DBConnection.SavePoint;
+import sady.utilframe.bdControl.DBControl;
+import sady.utilframe.bdControl.DBControl.DebugType;
+import sady.utilframe.bdControl.GenericObject;
+import sady.utilframe.bdControl.QueryFinder;
+import sady.utilframe.bdControl.connection.DBConnection.SavePoint;
 
 public class TransactionTest {
 

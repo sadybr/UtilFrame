@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import util.FileTools;
+import sady.utilframe.tools.FileTools;
 
 
 public class TestFileTools {

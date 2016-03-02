@@ -1,6 +1,6 @@
 package sady.utilframe.examples;
 
-import util.bdControl.DBObject;
+import sady.utilframe.bdControl.DBObject;
 
 public class Teste2 extends DBObject {
     /** Long. */

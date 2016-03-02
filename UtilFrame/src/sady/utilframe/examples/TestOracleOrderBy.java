@@ -2,14 +2,14 @@ package sady.utilframe.examples;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.bdControl.DBControl;
-import util.bdControl.DBControl.DATABASE;
-import util.bdControl.DBControl.DebugType;
-import util.bdControl.DBObject;
-import util.bdControl.DBView;
-import util.bdControl.GenericObject;
-import util.bdControl.ObjectOperation;
-import util.bdControl.QueryFinder;
+import sady.utilframe.bdControl.DBControl;
+import sady.utilframe.bdControl.DBControl.DATABASE;
+import sady.utilframe.bdControl.DBControl.DebugType;
+import sady.utilframe.bdControl.DBObject;
+import sady.utilframe.bdControl.DBView;
+import sady.utilframe.bdControl.GenericObject;
+import sady.utilframe.bdControl.ObjectOperation;
+import sady.utilframe.bdControl.QueryFinder;
 
 
 public class TestOracleOrderBy {

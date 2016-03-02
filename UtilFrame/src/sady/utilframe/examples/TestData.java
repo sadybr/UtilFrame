@@ -1,6 +1,6 @@
 package sady.utilframe.examples;
-import util.bdControl.DBControl;
-import util.bdControl.GenericObject;
+import sady.utilframe.bdControl.DBControl;
+import sady.utilframe.bdControl.GenericObject;
 
 
 public class TestData {

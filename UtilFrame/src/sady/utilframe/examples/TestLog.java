@@ -1,5 +1,5 @@
 package sady.utilframe.examples;
-import util.Log;
+import sady.utilframe.tools.Log;
 
 
 public class TestLog {

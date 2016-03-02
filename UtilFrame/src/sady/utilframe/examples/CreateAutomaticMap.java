@@ -1,6 +1,6 @@
 package sady.utilframe.examples;
 
-import util.DBObjectGenerator;
+import sady.utilframe.tools.DBObjectGenerator;
 
 public class CreateAutomaticMap {
 
