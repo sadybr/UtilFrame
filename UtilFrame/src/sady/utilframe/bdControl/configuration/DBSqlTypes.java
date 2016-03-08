@@ -33,6 +33,7 @@ public class DBSqlTypes {
     	TIMESTAMP(java.sql.Types.TIMESTAMP, "Timestamp"),
     	BOOLEAN(java.sql.Types.BOOLEAN, "Boolean"),
     	TINYINT(java.sql.Types.TINYINT, "Tinyint"),
+    	SMALLINT(java.sql.Types.SMALLINT, "Smallint"),
     	DOUBLE(java.sql.Types.DOUBLE, "Double"),
     	DECIMAL(java.sql.Types.DECIMAL, "Decimal"),
     	FLOAT(java.sql.Types.FLOAT, "Float"),
@@ -133,6 +134,7 @@ public class DBSqlTypes {
 				break;
 			case java.sql.Types.INTEGER:
 			case java.sql.Types.TINYINT:
+			case java.sql.Types.SMALLINT:
 				preparedStatement.setInt(index, Integer.parseInt(value.toString()));
 				break;
 			case java.sql.Types.BIGINT:

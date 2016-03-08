@@ -18,6 +18,7 @@ import sady.utilframe.bdControl.configuration.H2TableConfiguration;
 import sady.utilframe.bdControl.configuration.HsqlDbTableConfiguration;
 import sady.utilframe.bdControl.configuration.MySqlTableConfiguration;
 import sady.utilframe.bdControl.configuration.OracleTableConfiguration;
+import sady.utilframe.bdControl.configuration.SybaseTableConfiguration;
 import sady.utilframe.bdControl.configuration.TableConfiguration;
 import sady.utilframe.bdControl.connection.ConnectionFull;
 import sady.utilframe.bdControl.connection.DBConnection;
@@ -28,6 +29,7 @@ import sady.utilframe.bdControl.connection.HsqlDbConnection;
 import sady.utilframe.bdControl.connection.MysqlConnection;
 import sady.utilframe.bdControl.connection.OracleConnection;
 import sady.utilframe.bdControl.connection.OracleODBCConnection;
+import sady.utilframe.bdControl.connection.SybaseConnection;
 import sady.utilframe.tools.FileTools;
 import sady.utilframe.tools.Log;
 
@@ -54,7 +56,8 @@ public class DBControl {
 		MySql("mysql", MySqlTableConfiguration.class, MysqlConnection.class, false),
 		Oracle("oracle", OracleTableConfiguration.class, OracleConnection.class, false),
 		OracleODBC("oracleODBC", OracleTableConfiguration.class, OracleODBCConnection.class, false),
-		HsqlDb("hsqldb", HsqlDbTableConfiguration.class, HsqlDbConnection.class, true);
+		HsqlDb("hsqldb", HsqlDbTableConfiguration.class, HsqlDbConnection.class, true),
+		Sybase("sybase", SybaseTableConfiguration.class, SybaseConnection.class, false);
 
 		private Class<? extends TableConfiguration> config;
 		private Class<? extends ConnectionFull> connection;
@@ -87,6 +90,7 @@ public class DBControl {
 	
 	
 	public enum DebugType {
+		GENERIC,
 		CACHE,
 		QUERY,
 		CONFIGURATION,

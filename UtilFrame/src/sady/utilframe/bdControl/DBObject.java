@@ -153,7 +153,8 @@ public abstract class DBObject {
 	        if (type.getType() == DBSqlType.BOOLEAN.getType() 
 	        		|| type.getType() == DBSqlType.TINYINT.getType()) {
 	            ps.setBoolean(index, Boolean.parseBoolean(this.get(columnName, oldValues).toString()));
-	        } else if (type.getType() == DBSqlType.INT.getType()) {
+	        } else if (type.getType() == DBSqlType.INT.getType()
+	        		|| type.getType() == DBSqlType.SMALLINT.getType()) {
 	            ps.setInt(index, Integer.parseInt(this.get(columnName, oldValues).toString()));
 	        } else if (type.getType() == DBSqlType.LONG.getType()) {
 	        	String value = this.get(columnName).toString();
@@ -192,20 +193,23 @@ public abstract class DBObject {
 		return true;
 	}
 	private int update() {
+		if (this.getUpdatedValues() == null || this.getUpdatedValues().size() == 0) {
+			return -1;
+		}
 		Long start = System.currentTimeMillis();
 		this.beforeUpdate();
 //		if (this.getTableConfiguration().getPK().size() == 0) {
 //			throw new RuntimeException("Update não permitivo para tabela(" + this.getTableName() + ") sem PK");
 //		}
 		ConnectionFull connection = null;
+		StringBuilder sql = new StringBuilder(); 
 		try {
 		    connection = DBConnection.getConnection(this.tableConfiguration);
 	        PreparedStatement stm = null;
-	        StringBuilder sql = new StringBuilder(); 
 	        sql.append("update " + this.getTableNameWithOwner() + " set ");
 	        boolean first = true;
 	        int index = 0;
-	        for (String columnName : this.getTableConfiguration().getColumnNames()) {
+	        for (String columnName : this.getUpdatedValues()) {
 	        	if (this.getColumns().get(columnName) != null) {
 	        		if (!first) {
 	        			sql.append(", ");
@@ -218,9 +222,9 @@ public abstract class DBObject {
 	        sql.append(" where ");
 
 	        first = true;
-	        boolean hasPk = this.getTableConfiguration().getPK().size() != 0; 
+	        boolean hasPk = this.getPKs().size() != 0; 
 	        if (hasPk) {
-		        for (String columnName : this.getTableConfiguration().getPK()) {
+		        for (String columnName : this.getPKs()) {
 		        	if (this.getColumns().get(columnName) != null) {
 		        		if (!first) {
 		        			sql.append(", ");
@@ -247,14 +251,14 @@ public abstract class DBObject {
 	        index = 1;
 	        stm = connection.prepareStatement(sql.toString());
 
-	        for (String columnName : this.getTableConfiguration().getColumnNames()) {
+	        for (String columnName : this.getUpdatedValues()) {
 	        	if (this.setInPreparedStatement(columnName, stm, index)) {
 	        		index++;
 	        	}
 	        }
-	        
+
 	        if (hasPk) {
-		        for (String columnName : this.getTableConfiguration().getPK()) {
+		        for (String columnName : this.getPKs()) {
 		        	if (this.setInPreparedStatement(columnName, stm, index)) {
 		        		index++;
 		        	}
@@ -284,6 +288,12 @@ public abstract class DBObject {
 	        }
 	        return index;
 		} catch (SQLException e) {
+			if (DBControl.isDebugON(DBControl.DebugType.QUERY)) {
+				System.out.print("[" + DebugType.QUERY + "]");
+				System.out.print(CalendarTools.getCalendarDifAsStringMilli(System.currentTimeMillis() - start));
+				System.out.println(" - " + sql.toString());
+				System.out.println("{"+ this.toString() + "}");
+			}
 			e.printStackTrace();
 		} finally {
 		    if (connection != null) {
@@ -482,7 +492,8 @@ public abstract class DBObject {
         if (type.getType() == DBSqlType.BOOLEAN.getType()
         		|| type.getType() == DBSqlType.TINYINT.getType()) {
         	value = resultSet.getBoolean(columnName);
-        } else if (type.getType() == DBSqlType.INT.getType()) {
+        } else if (type.getType() == DBSqlType.INT.getType()
+        		|| type.getType() == DBSqlType.SMALLINT.getType()) {
     		value = resultSet.getInt(columnName);
         } else if (type.getType() == DBSqlType.LONG.getType()) {
         	value = resultSet.getLong(columnName);

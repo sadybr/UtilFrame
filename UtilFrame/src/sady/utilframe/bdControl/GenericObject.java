@@ -1,5 +1,8 @@
 package sady.utilframe.bdControl;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Objeto genérico para implementação do dbObject.
  *
@@ -34,4 +37,19 @@ public final class GenericObject extends DBObject {
 	public String getTableName() {
 		return this.tableName;
 	}
+	public void overwritePks(String ...pk) {
+		this.pks = Arrays.asList(pk);
+	}
+	
+	private List<String> pks;
+	@Override
+	protected List<String> getPKs() {
+		if (this.pks ==  null) {
+			return super.getPKs();
+		} else {
+			return this.pks;
+		}
+	}
+	
+	
 }
