@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import sady.utilframe.bdControl.DBControl;
 import sady.utilframe.bdControl.FullDBObject;
 import sady.utilframe.bdControl.FullGenericObject;
+import sady.utilframe.bdControl.DBControl.DATABASE;
 import sady.utilframe.bdControl.configuration.DBSqlTypes.DBSqlType;
 
 /**
@@ -26,9 +27,15 @@ public class DBObjectGenerator {
 	public static void main(String args[]) {
 			String id = JOptionPane.showInputDialog("Digite o id de conexao");
 			
+			String databases = "";
+			for (DATABASE d : DATABASE.values()) {
+				databases += d.getName() + ", ";
+			}
+			databases = databases.substring(0, databases.length() -2);
+			
 			DBControl.addConnectionId(id,
 									  JOptionPane.showInputDialog("Digite o nome do banco de dados"),
-									  JOptionPane.showInputDialog("Digite o tipo do bancode dados (h2 ou mysql)"),
+									  JOptionPane.showInputDialog("Digite o tipo do bancode dados\r\n (" + databases + ")"),
 									  JOptionPane.showInputDialog("Digite o host do banco de dados"),
 									  JOptionPane.showInputDialog("Digite o login do banco de dados"),
 									  JOptionPane.showInputDialog("Digite a senha do banco de dados"),
@@ -91,7 +98,7 @@ public class DBObjectGenerator {
 
 	private List<String> getImports() {
 		List<String> imports = new ArrayList<String>();
-		imports.add("\r\nimport util.bdControl.DBObject;");
+		imports.add("\r\nimport  sady.utilframe.bdControl.DBObject;");
 		
 		for (String name : ge.getColumnNames()) {
 			if (!imports.contains("\r\nimport java.util.Calendar;")) {
@@ -177,6 +184,7 @@ public class DBObjectGenerator {
 				return "Double";
 				
 			case INT:
+			case SMALLINT:
 				return "Integer";
 				
 			case LONG:
@@ -184,6 +192,7 @@ public class DBObjectGenerator {
 				
 			case VARCHAR:
 			case CHAR:
+			case CLOB:
 				return "String";
 				
 			case BLOB:
