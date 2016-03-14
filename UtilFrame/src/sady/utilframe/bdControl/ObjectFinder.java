@@ -86,9 +86,9 @@ public class ObjectFinder<T extends DBObject> {
             DBObject newDao;
             while (resultSet.next()) {
             	if (dbObject instanceof GenericObject) {
-            		newDao = new GenericObject(dbObject.getConectionId(), dbObject.getTableNameWithOwner());
+            		newDao = new GenericObject(dbObject.getConnectionId(), dbObject.getTableNameWithOwner());
             	} else if (dbObject instanceof FullGenericObject) {
-            			newDao = new FullGenericObject(dbObject.getConectionId(), dbObject.getTableNameWithOwner());
+            			newDao = new FullGenericObject(dbObject.getConnectionId(), dbObject.getTableNameWithOwner());
     			} else {
     				try {
     					newDao = dbObject.getClass().newInstance();

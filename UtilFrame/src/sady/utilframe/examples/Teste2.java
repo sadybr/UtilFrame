@@ -8,11 +8,10 @@ public class Teste2 extends DBObject {
     /** String. */
     public static String name = "name";
 
-    @Override
-    public String getConectionId() {
-        return "t";
+    public Teste2() {
+    	setConnectionId("t");
     }
-
+    
     @Override
     public String getTableName() {
         return "teste2";

@@ -32,8 +32,8 @@ public class DBView extends DBObject {
 		this.getColumns().put(newColumnName, col);
 		
 		if (this.connectionId == null) {
-			this.connectionId = o.getConectionId();
-		} else if (!this.connectionId.equals(o.getConectionId())) {
+			this.connectionId = o.getConnectionId();
+		} else if (!this.connectionId.equals(o.getConnectionId())) {
 			throw new RuntimeException("Não é possível utilizar tabelas de conexões diferentes");
 		}
 		
@@ -73,8 +73,13 @@ public class DBView extends DBObject {
 	}
 
 	@Override
-	public String getConectionId() {
+	public String getConnectionId() {
 		return connectionId;
+	}
+	
+	@Override
+	public void setConnectionId(String connectionId) {
+		this.connectionId = connectionId;
 	}
 	
 	protected boolean hasColumn(String columnName) {

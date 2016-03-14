@@ -52,6 +52,7 @@ public abstract class DBObject {
 	private boolean showCacheIn = true;
 	private String owner;
 	private boolean useBlobAsFile = false;
+	private String connectionId;
 
 	/**
 	 * 
@@ -83,7 +84,7 @@ public abstract class DBObject {
 		if (this.tableConfiguration == null) {
 			try {
 				DBControl control = DBControl.getInstance();
-				this.tableConfiguration = control.getTableConfiguration(this.getConectionId(), this.getTableNameWithOwner(), this.getAlternativeColumnConfiguration());
+				this.tableConfiguration = control.getTableConfiguration(this.getConnectionId(), this.getTableNameWithOwner(), this.getAlternativeColumnConfiguration());
 			} catch (InvalidAttributesException e) {
 				e.printStackTrace();
 				Log.error("DBObject", e);
@@ -342,7 +343,7 @@ public abstract class DBObject {
 			if (fakePk == null) {
 				fakePk = new HashMap<String, String>();
 			}
-			String fpk = fakePk.get(this.getConectionId() + this.getTableNameWithOwner());
+			String fpk = fakePk.get(this.getConnectionId() + this.getTableNameWithOwner());
 			
 			if (fpk == null) {
 				fpk = "0";
@@ -357,7 +358,7 @@ public abstract class DBObject {
 				pk = (Double.valueOf(fpk) + 1);
 			}
 			this.set(columnName, pk);
-			fakePk.put(this.getConectionId() + this.getTableNameWithOwner(), "" + pk);
+			fakePk.put(this.getConnectionId() + this.getTableNameWithOwner(), "" + pk);
 		}
 	}
 	private int create() {
@@ -628,7 +629,12 @@ public abstract class DBObject {
 	 * deverá ter um mapeamento no arquivo "files\mapping.properties" com as seguintes
 	 * informações: "id"_host= "id"_port= "id"_database= "id"_login= "id"_password=
 	 */
-	public abstract String getConectionId();
+	public String getConnectionId() {
+		return this.connectionId;
+	}
+	public void setConnectionId(String connectionId) {
+		this.connectionId = connectionId;
+	}
 	/**
 	 * Copia o dao.
 	 * @return
@@ -935,7 +941,7 @@ public abstract class DBObject {
 	public GenericObject getFKObject(String columnName) {
 		FKConfiguration dstFK = this.getFKConfiguration(columnName);
 		if (dstFK != null) {
-			return this.getFKObject(columnName, new GenericObject(this.getConectionId(), dstFK.getDstTableName()));
+			return this.getFKObject(columnName, new GenericObject(this.getConnectionId(), dstFK.getDstTableName()));
 		}
 		throw new RuntimeException("Não existe FK nessa coluna");
 	}
@@ -971,9 +977,9 @@ public abstract class DBObject {
 	public <T extends DBObject> T getFKObject(String columnName, T object) {
 		T obj = null;
 		if (object instanceof GenericObject) {
-			obj = (T) new GenericObject(object.getConectionId(), object.getTableNameWithOwner());
+			obj = (T) new GenericObject(object.getConnectionId(), object.getTableNameWithOwner());
 		} else if (object instanceof FullGenericObject) {
-				obj = (T) new FullGenericObject(object.getConectionId(), object.getTableNameWithOwner());
+				obj = (T) new FullGenericObject(object.getConnectionId(), object.getTableNameWithOwner());
 		} else {
 			try {
 				obj = (T) object.getClass().newInstance();
@@ -1121,7 +1127,7 @@ public abstract class DBObject {
 		try {
 			DBObject object;
 			if (this instanceof GenericObject) {
-				object = new GenericObject(this.getConectionId(), this.getTableName());
+				object = new GenericObject(this.getConnectionId(), this.getTableName());
 			} else {
 				object = this.getClass().newInstance();
 			}
@@ -1204,7 +1210,7 @@ public abstract class DBObject {
 	protected <T extends DBObject> T getFKObject(String srcColumnName, T object, String dstColumnName) {
 		T obj = null;
 		if (object instanceof GenericObject) {
-			obj = (T) new GenericObject(object.getConectionId(), object.getTableName());
+			obj = (T) new GenericObject(object.getConnectionId(), object.getTableName());
 		} else {
 			try {
 				obj = (T) object.getClass().newInstance();
@@ -1240,7 +1246,5 @@ public abstract class DBObject {
 	protected void afterUpdate(int result) {}
 	protected void afterSave(int result) {}
 	protected void afterDelete(int result) {}
-
-
 
 }

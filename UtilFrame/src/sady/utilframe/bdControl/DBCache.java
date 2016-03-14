@@ -83,7 +83,7 @@ public class DBCache {
 	}
 	
 	public void add(DBObject obj) {
-		FullGenericObject full = new FullGenericObject(obj.getConectionId(), obj.getTableNameWithOwner());
+		FullGenericObject full = new FullGenericObject(obj.getConnectionId(), obj.getTableNameWithOwner());
 //		System.out.println("add " + obj);
 		try {
 			this.lock();
@@ -100,7 +100,7 @@ public class DBCache {
 	}
 
 	public DBObject get(DBObject obj) {
-		FullGenericObject full = new FullGenericObject(obj.getConectionId(), obj.getTableNameWithOwner());
+		FullGenericObject full = new FullGenericObject(obj.getConnectionId(), obj.getTableNameWithOwner());
 //		System.out.println("get " + obj);
 		lock();
 		try {
@@ -129,10 +129,10 @@ public class DBCache {
 		if (obj == null) {
 			return;
 		}
-		if (obj.getConectionId() == null || obj.getTableNameWithOwner() == null) {
+		if (obj.getConnectionId() == null || obj.getTableNameWithOwner() == null) {
 			throw new RuntimeException("Objecto com descritor nulo.");
 		}
-		FullGenericObject full = new FullGenericObject(obj.getConectionId(), obj.getTableNameWithOwner());
+		FullGenericObject full = new FullGenericObject(obj.getConnectionId(), obj.getTableNameWithOwner());
 		if (DBControl.isDebugON(DBControl.DebugType.CACHE)) {
 		    System.out.print("[" + DebugType.CACHE + "]");
 			System.out.println("Remover: " + obj);

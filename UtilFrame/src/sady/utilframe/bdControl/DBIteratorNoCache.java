@@ -64,11 +64,13 @@ public class DBIteratorNoCache <T extends DBObject> implements DBIterator<T> {
 		try {
 			DBObject newDao;
 			if (this.object instanceof GenericObject) {
-				newDao = new GenericObject(this.object.getConectionId(), this.object.getTableNameWithOwner());
+				newDao = new GenericObject(this.object.getConnectionId(), this.object.getTableNameWithOwner());
 			} else if (this.object instanceof FullGenericObject) {
-	    		newDao = new FullGenericObject(this.object.getConectionId(), this.object.getTableNameWithOwner());
+	    		newDao = new FullGenericObject(this.object.getConnectionId(), this.object.getTableNameWithOwner());
 			} else {
 				newDao = this.object.getClass().newInstance();
+				newDao.setConnectionId(this.object.getConnectionId());
+				
 				if (this.object instanceof DBView) {
 					for(Entry<String, DBColumn> entry : this.object.getColumns().entrySet()) {
 						newDao.getColumns().put(entry.getKey(), entry.getValue().copy());

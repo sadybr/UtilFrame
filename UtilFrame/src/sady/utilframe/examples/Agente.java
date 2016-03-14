@@ -1,8 +1,9 @@
 package sady.utilframe.examples;
 
 
-import  sady.utilframe.bdControl.DBObject;
 import java.util.Calendar;
+
+import  sady.utilframe.bdControl.DBObject;
 
 public class Agente extends DBObject {
     /** Field (ident_agente) Type(Integer) DataType(INT). */
@@ -28,11 +29,10 @@ public class Agente extends DBObject {
     /** Field (data_expiracao) Type(Calendar) DataType(TIMESTAMP). */
     public static String dataExpiracao = "data_expiracao";
 
-    @Override
-    public String getConectionId() {
-        return "id";
-    }
-
+    public Agente() {
+    	setConnectionId("id");
+	}
+    
     @Override
     public String getTableName() {
         return "agente";

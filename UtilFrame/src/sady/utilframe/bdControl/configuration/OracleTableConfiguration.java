@@ -23,14 +23,14 @@ public class OracleTableConfiguration extends TableConfiguration {
 	        
 	        List<String> pks = new ArrayList<String>();
 	        
-	        ResultSet resultSet = meta.getPrimaryKeys(null, super.getOwner().toUpperCase(), super.tableName.toUpperCase());
+	        ResultSet resultSet = meta.getPrimaryKeys(null, super.getOwner() != null ? super.getOwner().toUpperCase() : null, super.tableName.toUpperCase());
 	        
 	        while (resultSet.next()) {
 	        	pks.add(resultSet.getString("COLUMN_NAME"));
 	        }
 	        
 //	        TBRESPOSTA        
-			resultSet = meta.getColumns(null, super.getOwner().toUpperCase(), super.tableName.toUpperCase(), null);
+			resultSet = meta.getColumns(null, super.getOwner() != null ? super.getOwner().toUpperCase() : null, super.tableName.toUpperCase(), null);
 	
 	        DBSqlType dataType;
 	        while (resultSet.next()) {

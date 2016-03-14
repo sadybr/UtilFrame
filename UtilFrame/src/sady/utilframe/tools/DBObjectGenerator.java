@@ -127,9 +127,9 @@ public class DBObjectGenerator {
 
 	private String getDBMethods() {
 		StringBuilder buffer = new StringBuilder();
-		buffer.append("\r\n\r\n    @Override");
-		buffer.append("\r\n    public String getConectionId() {");
-		buffer.append("\r\n        return \"" + this.ge.getConectionId() + "\";");
+		buffer.append("\r\n\r\n");
+		buffer.append("\r\n    public " + this.generateName(this.ge.getTableName(), true) + "() {");
+		buffer.append("\r\n        setConnectionId(\"" + this.ge.getConnectionId() + "\");");
 		buffer.append("\r\n    }");
 		buffer.append("\r\n");
 		buffer.append("\r\n    @Override");

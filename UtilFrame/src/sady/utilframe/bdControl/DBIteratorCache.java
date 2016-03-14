@@ -38,11 +38,12 @@ public class DBIteratorCache <T extends DBObject> implements DBIterator<T> {
 	    	DBCache cache = DBCache.getInstance();
 			while (resultSet.next()) {
 				if (this.object instanceof GenericObject) {
-					newDao = (T) new GenericObject(this.object.getConectionId(), this.object.getTableNameWithOwner());
+					newDao = (T) new GenericObject(this.object.getConnectionId(), this.object.getTableNameWithOwner());
 				} else if (this.object instanceof FullGenericObject) {
-					newDao = (T) new FullGenericObject(this.object.getConectionId(), this.object.getTableNameWithOwner());
+					newDao = (T) new FullGenericObject(this.object.getConnectionId(), this.object.getTableNameWithOwner());
 				} else {
 					newDao = (T) this.object.getClass().newInstance();
+					newDao.setConnectionId(this.object.getConnectionId());
 				}
 				newDao.setShowCacheIn(this.object.isUseBlobAsFile());
 				newDao.setOwner(this.object.getOwner());

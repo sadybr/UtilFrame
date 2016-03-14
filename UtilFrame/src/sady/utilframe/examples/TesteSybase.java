@@ -11,9 +11,11 @@ public class TesteSybase {
 
 	public static void main(String[] args) {
 		try {
-			String id = "id";
-			DBControl.addConnectionId(id, "xxx", DATABASE.Sybase, "xxx", "xxxx", "xxxx", "xxxx");
-			DBControl.addDebug(DebugType.QUERY);
+//			String id = "id";
+//			DBControl.addConnectionId(id, "xxx", DATABASE.Sybase, "xxx", "xxxx", "xxxx", "xxxx");
+//			DBControl.addDebug(DebugType.QUERY);
+			
+			DBControl.setAlternativeConfigFile("C:\\Temp\\conf.conf");
 
 			
 //			GenericObject ge = new GenericObject(id, "agente");

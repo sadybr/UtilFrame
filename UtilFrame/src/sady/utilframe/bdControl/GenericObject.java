@@ -10,7 +10,7 @@ import java.util.List;
  *
  */
 public final class GenericObject extends DBObject {
-	private String id;
+	private String connectionId;
 	private String tableName;
 
 	/**
@@ -19,7 +19,7 @@ public final class GenericObject extends DBObject {
 	 * @param name table name of object
 	 */
 	public GenericObject(String connectionId, String tableName) {
-		this.id = connectionId;
+		this.connectionId = connectionId;
 		if (!tableName.contains(".")) {
 			this.tableName = tableName;
 		} else {
@@ -29,10 +29,13 @@ public final class GenericObject extends DBObject {
 		}
 	}
 	@Override
-	public String getConectionId() {
-		return this.id;
+	public String getConnectionId() {
+		return this.connectionId;
 	}
-
+	@Override
+	public void setConnectionId(String connectionId) {
+		this.connectionId = connectionId;
+	}
 	@Override
 	public String getTableName() {
 		return this.tableName;

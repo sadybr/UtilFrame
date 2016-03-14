@@ -7,11 +7,11 @@ package sady.utilframe.bdControl;
  *
  */
 public final class FullGenericObject extends FullDBObject {
-	private String id;
+	private String connectionId;
 	private String tableName;
 
 	public FullGenericObject(String connectionId, String tableName) {
-		this.id = connectionId;
+		this.connectionId = connectionId;
 		if (!tableName.contains(".")) {
 			this.tableName = tableName;
 		} else {
@@ -21,10 +21,15 @@ public final class FullGenericObject extends FullDBObject {
 		}
 	}
 	@Override
-	public String getConectionId() {
-		return this.id;
+	public String getConnectionId() {
+		return this.connectionId;
 	}
 
+	@Override
+	public void setConnectionId(String connectionId) {
+		this.connectionId = connectionId;
+	}
+	
 	@Override
 	public String getTableName() {
 		return this.tableName;
