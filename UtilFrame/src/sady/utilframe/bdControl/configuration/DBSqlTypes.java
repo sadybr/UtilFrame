@@ -40,9 +40,8 @@ public class DBSqlTypes {
     	BLOB(java.sql.Types.BLOB, "Binary"),
     	MYSQL_ENUM(528, "Enum"),
     	CLOB(java.sql.Types.CLOB, "String"),
-    	LONG_VARCHAR(java.sql.Types.LONGVARCHAR, "String")
-    	
-    	;
+    	LONG_VARCHAR(java.sql.Types.LONGVARCHAR, "String"),
+    	NUMERIC(java.sql.Types.NUMERIC, "Numeric");
     	
     	private int type;
     	private String name;
@@ -91,7 +90,8 @@ public class DBSqlTypes {
         } else if (dataTypeLower.contains("timestamp")) {
             return DBSqlType.TIMESTAMP;
         } else if (dataTypeLower.contains("decimal")
-        		|| dataTypeLower.contains("double")) {
+        		|| dataTypeLower.contains("double")
+        		|| dataTypeLower.contains("numeric")) {
             return DBSqlType.DOUBLE;
         } else if (dataTypeLower.contains("enum") && dbType.equals(DBControl.DATABASE.MySql)) {
         	return DBSqlType.MYSQL_ENUM;

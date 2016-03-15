@@ -181,6 +181,7 @@ public class DBObjectGenerator {
 				
 			case DECIMAL:
 			case DOUBLE:
+			case NUMERIC:
 				return "Double";
 				
 			case INT:

@@ -162,7 +162,8 @@ public abstract class DBObject {
 	            ps.setLong(index, !value.contentEquals(".") ? Long.parseLong(value) : (new Double(value)).longValue());
 	        } else if (type.getType() == DBSqlType.DOUBLE.getType()
 	        		|| type.getType() == DBSqlType.DECIMAL.getType() 
-	        		|| type.getType() == DBSqlType.FLOAT.getType()) {
+	        		|| type.getType() == DBSqlType.FLOAT.getType()
+	        		|| type.getType() == DBSqlType.NUMERIC.getType()) {
 	            ps.setDouble(index, Double.parseDouble(this.get(columnName, oldValues).toString()));
 	        } else if (type.getType() == DBSqlType.DATE.getType()) {
 	            ps.setDate(index, new java.sql.Date(((Calendar)this.get(columnName, oldValues)).getTimeInMillis()));
@@ -332,7 +333,8 @@ public abstract class DBObject {
 					this.set(columnName, 1L);
 				}
 			} else if (this.getConfiguration(columnName).getType() == DBSqlType.DOUBLE
-					|| this.getConfiguration(columnName).getType() == DBSqlType.DECIMAL) {
+					|| this.getConfiguration(columnName).getType() == DBSqlType.DECIMAL
+					|| this.getConfiguration(columnName).getType() == DBSqlType.NUMERIC) {
 				if (ob != null) {
 					this.set(columnName, 1 + (Double)ob.get(columnName));
 				} else {
@@ -354,7 +356,8 @@ public abstract class DBObject {
 			} else if (this.getConfiguration(columnName).getType() == DBSqlType.LONG) {
 				pk = (Long.valueOf(fpk) + 1);
 			} else if (this.getConfiguration(columnName).getType() == DBSqlType.DOUBLE
-					|| this.getConfiguration(columnName).getType() == DBSqlType.DECIMAL) {
+					|| this.getConfiguration(columnName).getType() == DBSqlType.DECIMAL
+					|| this.getConfiguration(columnName).getType() == DBSqlType.NUMERIC) {
 				pk = (Double.valueOf(fpk) + 1);
 			}
 			this.set(columnName, pk);
@@ -500,7 +503,8 @@ public abstract class DBObject {
         	value = resultSet.getLong(columnName);
         } else if (type.getType() == DBSqlType.DOUBLE.getType()
         		|| type.getType() == DBSqlType.DECIMAL.getType()
-        		|| type.getType() == DBSqlType.FLOAT.getType()) {
+        		|| type.getType() == DBSqlType.FLOAT.getType()
+        		|| type.getType() == DBSqlType.NUMERIC.getType()) {
         	value = resultSet.getDouble(columnName);
         } else if (type.getType() == DBSqlType.VARCHAR.getType()
         		|| type.getType() == DBSqlType.CHAR.getType()
