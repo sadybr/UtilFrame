@@ -133,9 +133,11 @@ public class DBSqlTypes {
 				preparedStatement.setString(index, (String) value);
 				break;
 			case java.sql.Types.INTEGER:
+				preparedStatement.setInt(index, Integer.parseInt(value.toString()));
+				break;
 			case java.sql.Types.TINYINT:
 			case java.sql.Types.SMALLINT:
-				preparedStatement.setInt(index, Integer.parseInt(value.toString()));
+				preparedStatement.setShort(index, Short.parseShort(value.toString()));
 				break;
 			case java.sql.Types.BIGINT:
 				preparedStatement.setLong(index, Long.parseLong(value.toString()));

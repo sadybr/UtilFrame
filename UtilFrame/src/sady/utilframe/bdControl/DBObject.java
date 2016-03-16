@@ -67,7 +67,7 @@ public abstract class DBObject {
 			return column.getValue(oldValue);
 		}
 		int type = this.getConfiguration(columnName.toLowerCase()).getType().getType();
-		if (type == DBSqlType.BOOLEAN.getType() || type == DBSqlType.TINYINT.getType()) {
+		if (type == DBSqlType.BOOLEAN.getType()) {
 			return false;
 		}
 		return null;
@@ -151,12 +151,13 @@ public abstract class DBObject {
 			ps.setNull(index, this.getConfiguration(columnName).getType().getType());
 		} else {
 			DBSqlType type = this.getConfiguration(columnName).getType(); 
-	        if (type.getType() == DBSqlType.BOOLEAN.getType() 
-	        		|| type.getType() == DBSqlType.TINYINT.getType()) {
+	        if (type.getType() == DBSqlType.BOOLEAN.getType()) {
 	            ps.setBoolean(index, Boolean.parseBoolean(this.get(columnName, oldValues).toString()));
-	        } else if (type.getType() == DBSqlType.INT.getType()
-	        		|| type.getType() == DBSqlType.SMALLINT.getType()) {
-	            ps.setInt(index, Integer.parseInt(this.get(columnName, oldValues).toString()));
+	        } else if (type.getType() == DBSqlType.INT.getType()) {
+	        	ps.setInt(index, Integer.parseInt(this.get(columnName, oldValues).toString()));
+	        } else if (type.getType() == DBSqlType.SMALLINT.getType()
+	        		|| type.getType() == DBSqlType.TINYINT.getType()) {
+	        	ps.setShort(index, Short.parseShort(this.get(columnName, oldValues).toString()));
 	        } else if (type.getType() == DBSqlType.LONG.getType()) {
 	        	String value = this.get(columnName).toString();
 	            ps.setLong(index, !value.contentEquals(".") ? Long.parseLong(value) : (new Double(value)).longValue());
@@ -493,12 +494,13 @@ public abstract class DBObject {
         if (type == null) {
         	System.out.println(this.getTableNameWithOwner() + "." + columnName);
         }
-        if (type.getType() == DBSqlType.BOOLEAN.getType()
-        		|| type.getType() == DBSqlType.TINYINT.getType()) {
+        if (type.getType() == DBSqlType.BOOLEAN.getType()) {
         	value = resultSet.getBoolean(columnName);
-        } else if (type.getType() == DBSqlType.INT.getType()
-        		|| type.getType() == DBSqlType.SMALLINT.getType()) {
-    		value = resultSet.getInt(columnName);
+        } else if (type.getType() == DBSqlType.INT.getType()) {
+        	value = resultSet.getInt(columnName);
+        } else if (type.getType() == DBSqlType.SMALLINT.getType()
+        		|| type.getType() == DBSqlType.TINYINT.getType()) {
+    		value = resultSet.getShort(columnName);
         } else if (type.getType() == DBSqlType.LONG.getType()) {
         	value = resultSet.getLong(columnName);
         } else if (type.getType() == DBSqlType.DOUBLE.getType()

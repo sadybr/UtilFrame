@@ -258,11 +258,13 @@ class NewQueryFinder <T extends DBObject>{
 //    	}
 //
 //        switch (filter.object.getConfiguration(filter.column).getType()) {
+//          case DBSqlTypes.TINYINT:
+//              ps.setShort(index, (Short) filter.filterValue);
+//              break;
 //	        case DBSqlTypes.INT:
 //	            ps.setInt(index, (Integer) filter.filterValue);
 //	            break;
 //	        case DBSqlTypes.BOOLEAN:
-//	        case DBSqlTypes.TINYINT:
 //	            ps.setBoolean(index, (Boolean) filter.filterValue);
 //	            break;
 //	        case DBSqlTypes.LONG:

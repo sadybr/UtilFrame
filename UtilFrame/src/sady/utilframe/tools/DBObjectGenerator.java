@@ -147,8 +147,7 @@ public class DBObjectGenerator {
 		for (String name : ge.getColumnNames()) {
 			String fieldName = this.generateName(name, false);
 			buffer = new StringBuilder();
-			if (this.ge.getConfiguration(name).getType().getType() == DBSqlType.BOOLEAN.getType()
-					|| this.ge.getConfiguration(name).getType().getType() == DBSqlType.TINYINT.getType()) {
+			if (this.ge.getConfiguration(name).getType().getType() == DBSqlType.BOOLEAN.getType()) {
 				buffer.append("\r\n\r\n    public ").append(this.decodeTypeName(name, false)).append(" is").append(this.generateName(fieldName, true)).append("() {");
 			} else {
 				buffer.append("\r\n\r\n    public ").append(this.decodeTypeName(name, false)).append(" get").append(this.generateName(fieldName, true)).append("() {");
@@ -169,7 +168,6 @@ public class DBObjectGenerator {
 		
 		switch (type) {
 			case BOOLEAN:
-			case TINYINT:
 				if (onlyObject) {
 					return "Boolean";
 				}
@@ -185,8 +183,11 @@ public class DBObjectGenerator {
 				return "Double";
 				
 			case INT:
-			case SMALLINT:
 				return "Integer";
+			
+			case SMALLINT:
+			case TINYINT:
+				return "Short";
 				
 			case LONG:
 				return "Long";

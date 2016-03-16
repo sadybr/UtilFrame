@@ -144,9 +144,11 @@ public class ObjectFinder<T extends DBObject> {
         }
 
         DBSqlType type = dao.getConfiguration(column).getType(); 
-		if (type.getType() == DBSqlType.BOOLEAN.getType()
-				|| type.getType() == DBSqlType.TINYINT.getType()) {
+		if (type.getType() == DBSqlType.BOOLEAN.getType()) {
             ps.setBoolean(index, (Boolean)dao.get(column));
+		} else if(type.getType() == DBSqlType.SMALLINT.getType()
+				|| type.getType() == DBSqlType.TINYINT.getType()) {
+			ps.setShort(index, (Short)dao.get(column));
     	} else if (type.getType() == DBSqlType.INT.getType()) {
             ps.setInt(index, (Integer)dao.get(column));
     	} else if (type.getType() == DBSqlType.LONG.getType()) {
